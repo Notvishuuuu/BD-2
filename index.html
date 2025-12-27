@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
+body {
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fad0c4);
+  background-size: 300% 300%;
+  animation: bg 10s ease infinite;
+  color: #fff;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+@keyframes bg {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* ===== HEART ===== */
+.heart {
+  font-size: 120px;
+  animation: beat 1.2s infinite;
+  margin: 20px 0;
+}
+
+@keyframes beat {
+  0%, 100% {transform: scale(1);}
+  50% {transform: scale(1.15);}
+}
+
+/* ===== HEADINGS ===== */
+h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  opacity: 0.95;
+}
+
+/* ===== GALLERY ===== */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+  margin: 40px 0;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  transition: transform 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* ===== BUTTONS ===== */
+.buttons {
+  margin-top: 40px;
+}
+
+button {
+  padding: 14px 30px;
+  font-size: 1rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+#no {
+  background: #555;
+  color: white;
+  position: relative;
+}
+
+/* ===== MUSIC BUTTON ===== */
+.music {
+  margin-top: 30px;
+  background: rgba(255,255,255,0.2);
+}
+
+/* ===== FLOATING HEARTS ===== */
+.floating {
+  position: fixed;
+  bottom: -20px;
+  font-size: 24px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+
+/* ===== FIREWORK ===== */
+.firework {
+  position: fixed;
+  font-size: 20px;
+  animation: boom 1.5s ease-out forwards;
+}
+
+@keyframes boom {
+  from {transform: scale(0); opacity: 1;}
+  to {transform: scale(2.5); opacity: 0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Happy Birthday ❤️</h1>
+  <div class="heart">💖</div>
+  <p>
+    Today is special because **you** exist.  
+    Thank you for being my favorite person, my smile, my happiness.
+  </p>
+
+  <!-- Gallery -->
+  <div class="gallery">
+    <img src="https://via.placeholder.com/300x400?text=Photo+1">
+    <img src="https://via.placeholder.com/300x400?text=Photo+2">
+    <img src="https://via.placeholder.com/300x400?text=Photo+3">
+    <img src="https://via.placeholder.com/300x400?text=Photo+4">
+  </div>
+
+  <!-- Buttons -->
+  <div class="buttons">
+    <h2>Will you be mine forever? 💍</h2>
+    <button id="yes">YES 💖</button>
+    <button id="no">NO 🙈</button>
+  </div>
+
+  <!-- Music -->
+  <button class="music" onclick="toggleMusic()">🎵 Play / Pause Music</button>
+</div>
+
+<!-- Audio -->
+<audio id="song" loop>
+  <source src="your-song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* Floating hearts */
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "floating";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.innerHTML = "💗";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 500);
+
+/* No button runs away */
+const noBtn = document.getElementById("no");
+noBtn.addEventListener("mouseover", () => {
+  noBtn.style.left = Math.random() * 200 - 100 + "px";
+  noBtn.style.top = Math.random() * 200 - 100 + "px";
+});
+
+/* Yes fireworks */
+document.getElementById("yes").onclick = () => {
+  for(let i=0;i<20;i++){
+    const f = document.createElement("div");
+    f.className = "firework";
+    f.style.left = Math.random()*100+"vw";
+    f.style.top = Math.random()*100+"vh";
+    f.innerHTML = "✨";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1500);
+  }
+  alert("Forever sounds perfect 💖");
+};
+
+/* Music */
+const song = document.getElementById("song");
+function toggleMusic(){
+  if(song.paused) song.play();
+  else song.pause();
+}
+</script>
+
+</body>
+</html>
